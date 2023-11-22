@@ -1,10 +1,20 @@
-﻿namespace PetShop.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
+namespace PetShop.Models
 {
-    public class Servico
+    public class ServicoModel
     {
+        [Column("idservico")]
         public int Id { get; set; }
+        [Column("nomeservico")]
+        public string Nome { get; set; }
+        [Column("descricaoservico")]
         public string Descricao { get; set; }
-        public Animal Animal { get; set; }
-        public int AnimalId { get; set; }
+
+        [JsonIgnore]
+        public PetShopModel PetShop { get; set; }
+        [ForeignKey("idpershop")]
+        public int PetShopId { get; set; }
     }
 }

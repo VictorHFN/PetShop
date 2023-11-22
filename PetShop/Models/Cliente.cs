@@ -1,9 +1,13 @@
-﻿namespace PetShop.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PetShop.Models
 {
-    public class Cliente
+    public class ClienteModel
     {
+        [Column("idcliente")]
         public int Id { get; set; }
-        public string Name { get; set; }
+        [Column("nomecliente")]
+        public string Nome { get; set; }
         
     }
 }
