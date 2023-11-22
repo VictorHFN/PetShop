@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace PetShop.Controllers
 {
-    public class HomeController : Controller
+    public class PetShopController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<PetShopController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public PetShopController(ILogger<PetShopController> logger)
         {
             _logger = logger;
         }

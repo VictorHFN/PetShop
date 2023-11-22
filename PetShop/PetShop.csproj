@@ -14,9 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Animais\" />
-    <Folder Include="Views\Servico\" />
-    <Folder Include="Views\PetShop\" />
+    <Content Remove="Views\Animal\AlterarAnimal.razor" />
+    <Content Remove="Views\Animal\CadastrarAnimal.razor" />
+    <Content Remove="Views\Animal\ExcluirAnimal.razor" />
+    <Content Remove="Views\Animal\IndexAnimal.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Animal\ExcluirAnimal.razor" />
+    <None Include="Views\Animal\IndexAnimal.razor" />
+    <None Include="Views\Animal\CadastrarAnimal.razor" />
+    <None Include="Views\Animal\AlterarAnimal.razor" />
   </ItemGroup>
 
 </Project>
