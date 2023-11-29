@@ -32,6 +32,23 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Rota específica para o controlador 'Animal' e a ação 'Index'
+app.MapControllerRoute(
+    name: "IndexAnimal",
+    pattern: "Animal/Index",
+    defaults: new { controller = "Animal", action = "Index" });
+
+app.MapControllerRoute(
+    name: "EditarAnimal",
+    pattern: "Animal/Editar/{id}",
+    defaults: new { controller = "Animal", action = "Editar" });
+
+app.MapControllerRoute(
+    name: "CadastrarAnimal",
+    pattern: "Animal/Cadastrar",
+    defaults: new { controller = "Animal", action = "Cadastrar" });
+
+// Rota padrão
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

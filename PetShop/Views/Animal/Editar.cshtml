@@ -10,6 +10,7 @@
         <h1 class="text-light">Editar Animal</h1>
     </div>
 
+    <!-- Adicione o atributo "asp-action" com o método HTTP "post" -->
     <form method="post" asp-controller="Animal" asp-action="Editar">
 
         <input type="hidden" asp-for="Id">
@@ -21,7 +22,7 @@
         </div>
         <br>
         <div class="form-group">
-            <label for="Valor" class="text-light">Raca</label>
+            <label for="Valor" class="text-light">Raça</label>
             <input type="text" class="form-control" asp-for="Raca" id="Raca" placeholder="Informe a Raça . . ." />
             <span class="text-danger" asp-validation-for="Raca"></span>
         </div>
@@ -31,9 +32,9 @@
             <span class="text-danger" asp-validation-for="Porte"></span>
         </div>
         <br><br>
-        <div class="d-flex gap-5 wt-5">
+        <div class="d-flex gap-5 w-100">
             <button type="submit" class="btn btn-success w-50">Enviar</button>
-            <a class="btn btn-primary w-50" asp-controller="Pedido" asp-action="Index">Voltar</a>
+            <a class="btn btn-primary w-50" asp-controller="Animal" asp-action="Index">Voltar</a>
         </div>
 
     </form>

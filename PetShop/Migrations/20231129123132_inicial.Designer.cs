@@ -11,8 +11,8 @@ using PetShop.Data;
 namespace PetShop.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231122183639_Database")]
-    partial class Database
+    [Migration("20231129123132_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
