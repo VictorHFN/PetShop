@@ -1,8 +1,36 @@
-﻿@{
+﻿@model AnimalModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="container bg-dark p-5 rounded-5">
+
+    <div class="mb-5 text-center">
+        <h1 class="text-light">Cadastro de Aluno</h1>
+    </div>
+
+    <form method="post" asp-controller="Aluno" asp-action="Cadastrar">
+
+        <div class="form-group">
+            <label for="Animal" class="text-light">Animal</label>
+            <input type="text" class="form-control" asp-for="Nome" id="Animal" placeholder="Informe o nome do Animal . . ." />
+            <span class="text-danger" asp-validation-for="Nome"></span>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="Raca" class="text-light">Raca</label>
+            <input type="text" class="form-control" asp-for="Raca" id="Raca" placeholder="Informe o Raça . . ." />
+            <span class="text-danger" asp-validation-for="Raca"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="Raca" class="text-light">Porte</label>
+            <input type="text" class="form-control" asp-for="Porte" id="Porte" placeholder="Informe o Porte do Animal . . ." />
+            <span class="text-danger" asp-validation-for="Porte"></span>
+        </div>
+        <br><br>
+        <div class="d-flex gap-5 wt-5">
+            <button type="submit" class="btn btn-success w-50">Enviar</button>
+            <a class="btn btn-primary w-50" asp-controller="Pedido" asp-action="Index">Voltar</a>
+    </form>
+        </div>

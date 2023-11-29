@@ -34,11 +34,4 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="Views\Animal\ExcluirAnimal.razor" />
-    <None Include="Views\Animal\IndexAnimal.razor" />
-    <None Include="Views\Animal\CadastrarAnimal.razor" />
-    <None Include="Views\Animal\AlterarAnimal.razor" />
-  </ItemGroup>
-
 </Project>
