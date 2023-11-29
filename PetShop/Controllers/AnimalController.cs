@@ -58,7 +58,7 @@ namespace PetShop.Controllers
         {
             var animal = _dbContext.Animais.Find(id);
 
-            if (animal == null)
+            if (animal is null)
             {
                 return NotFound();
             }
@@ -84,7 +84,7 @@ namespace PetShop.Controllers
         {
             var animal = _dbContext.Animais.Find(id);
 
-            if (animal == null)
+            if (animal is null)
             {
                 return NotFound();
             }
@@ -97,7 +97,7 @@ namespace PetShop.Controllers
         {
             var animal = _dbContext.Animais.Find(id);
 
-            if (animal == null)
+            if (animal is null)
             {
                 return NotFound();
             }
