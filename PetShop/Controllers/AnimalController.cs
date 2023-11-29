@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using PetShop.Data;
 using PetShop.Models;
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -10,9 +11,9 @@ namespace PetShop.Controllers
     public class AnimalController : Controller
     {
         private readonly ILogger<AnimalController> _logger;
-        private readonly ApplicationDBContext _dbContext; // Adicione a instância do contexto do banco de dados
+        private readonly ApplicationDBContext _dbContext;
 
-        public AnimalController(ILogger<AnimalController> logger, ApplicationDBContext dbContext) // Adicione o contexto do banco de dados ao construtor
+        public AnimalController(ILogger<AnimalController> logger, ApplicationDBContext dbContext)
         {
             _logger = logger;
             _dbContext = dbContext;
@@ -20,71 +21,91 @@ namespace PetShop.Controllers
 
         public IActionResult Index()
         {
-            // Aqui você normalmente buscaria dados do modelo do banco de dados ou de outra fonte de dados
-            // Por enquanto, vamos criar uma lista de exemplo
-            var model = new List<AnimalModel>
-            {
-                new AnimalModel { Id = 1, Nome = "Cachorro", Raca = "Golden Retriever", Porte = "Médio" },
-                new AnimalModel { Id = 2, Nome = "Gato", Raca = "Siamês", Porte = "Pequeno" },
-                // Adicione mais animais conforme necessário
-            };
-
+            var model = _dbContext.Animais.ToList();
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Cadastrar()
+        {
+            return View();
         }
 
         [HttpPost]
         public IActionResult Cadastrar(AnimalModel novoAnimal)
         {
-            if (ModelState.IsValid)
+            try
             {
-                // Adicione o novo animal ao contexto do banco de dados
-                _dbContext.Add(novoAnimal);
+                if (ModelState.IsValid)
+                {
+                    _dbContext.Add(novoAnimal);
+                    _dbContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-                // Salve as alterações no banco de dados
-                _dbContext.SaveChanges();
-
-                // Redirecione para a página desejada após o cadastro
-                return RedirectToAction("Index");
+                return View(novoAnimal);
             }
+            catch (Exception ex)
+            {
+                // Adicione log ou imprima o erro para identificar a causa do problema
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }    
 
-            // Se houver erros de validação, retorne à view para corrigi-los
-            return View(novoAnimal);
-        }
-
-        // Ação para exibir a página de edição de um animal
+        [HttpGet]
         public IActionResult Editar(int id)
         {
-            // Aqui você normalmente buscaria os dados do animal pelo ID do banco de dados
-            // Por enquanto, vamos criar um modelo de exemplo com base no ID
-            var model = new AnimalModel
-            {
-                Id = id,
-                Nome = "Animal de Teste",
-                Raca = "Raça de Teste",
-                Porte = "Porte de Teste"
-            };
+            var animal = _dbContext.Animais.Find(id);
 
-            return View(model);
+            if (animal == null)
+            {
+                return NotFound();
+            }
+
+            return View(animal);
         }
 
-        // Ação para processar o formulário de edição (HTTP POST)
         [HttpPost]
         public IActionResult Editar(AnimalModel animal)
         {
             if (ModelState.IsValid)
             {
-                // Atualize o animal no contexto do banco de dados
                 _dbContext.Update(animal);
-
-                // Salve as alterações no banco de dados
                 _dbContext.SaveChanges();
-
-                // Redirecione para a página desejada após a edição
                 return RedirectToAction("Index");
             }
 
-            // Se houver erros de validação, retorne à view para corrigi-los
             return View(animal);
+        }
+
+        [HttpGet]
+        public IActionResult Excluir(int id)
+        {
+            var animal = _dbContext.Animais.Find(id);
+
+            if (animal == null)
+            {
+                return NotFound();
+            }
+
+            return View(animal);
+        }
+
+        [HttpPost, ActionName("Excluir")]
+        public IActionResult ConfirmarExcluir(int id)
+        {
+            var animal = _dbContext.Animais.Find(id);
+
+            if (animal == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Animais.Remove(animal);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()

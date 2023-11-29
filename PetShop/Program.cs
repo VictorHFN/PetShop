@@ -48,6 +48,7 @@ app.MapControllerRoute(
     pattern: "Animal/Cadastrar",
     defaults: new { controller = "Animal", action = "Cadastrar" });
 
+
 // Rota padrão
 app.MapControllerRoute(
     name: "default",
