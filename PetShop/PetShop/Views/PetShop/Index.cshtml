@@ -1,0 +1,44 @@
+﻿@model IEnumerable<PetShopModel>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1>Animais</h1>
+        <a class="btn btn-success mx-2" asp-controller="PetShop" asp-action="Cadastrar">Cadastrar PetShop</a>
+    </div>
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col">Espécie</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var petshop in Model)
+                {
+                    <tr>
+                        <th scope="row">@petshop.Id</th>
+                        <td scope="row">@petshop.Nome</td>
+                        <td scope="row">@petshop.CNPJ</td>
+                        <td>
+                            <a class="btn btn-warning mx-2"  asp-controller="PetShop" asp-action="Editar" asp-route-id="@petshop.Id">Editar</a>
+                            <a class="btn btn-danger mx-2" asp-controller="PetShop" asp-action="Excluir" asp-route-id="@petshop.Id">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            } else
+            {
+                <tr>
+                    <td>
+                        <strong>
+                            Nenhum petshop cadastrador!
+                        </strong>
+                    </td>
+                </tr>
+            } 
+        </tbody>
+    </table>
+</div>
