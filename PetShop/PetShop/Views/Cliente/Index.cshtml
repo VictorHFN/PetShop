@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ClienteModel>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1>Animais</h1>
+        <a class="btn btn-success mx-2" asp-controller="Cliente" asp-action="Cadastrar">Cadastrar Cliente</a>
+    </div>
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var cliente in Model)
+                {
+                    <tr>
+                        <th scope="row">@cliente.Id</th>
+                        <td scope="row">@cliente.Nome</td>
+                        <td>
+                            <a class="btn btn-warning mx-2"  asp-controller="Cliente" asp-action="Editar" asp-route-id="@cliente.Id">Editar</a>
+                            <a class="btn btn-danger mx-2" asp-controller="Cliente" asp-action="Excluir" asp-route-id="@cliente.Id">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            } else
+            {
+                <tr>
+                    <td>
+                        <strong>
+                            Nenhum cliente cadastrador!
+                        </strong>
+                    </td>
+                </tr>
+            } 
+        </tbody>
+    </table>
+</div>
